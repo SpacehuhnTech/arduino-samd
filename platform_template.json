@@ -1,0 +1,52 @@
+{
+    "name": "WiFi Duck SAMD Boards",
+    "architecture": "samd",
+    "version": "__VERSION__",
+    "category": "wifiduck",
+    "url": "__LINK__",
+    "archiveFileName": "__FILENAME__",
+    "checksum": "SHA-256:__HASH__",
+    "size": "__SIZE__",
+    "help": { "online": "https://github.com/spacehuhn/WiFiDuck" },
+    "boards": [
+        {"name": "Adafruit Trinket M0 (SAMD21)"},
+        {"name": "Project Sero (SAMD21)"}
+    ],
+    "toolsDependencies": [
+        {
+        "packager": "arduino",
+        "name": "arm-none-eabi-gcc",
+        "version": "7-2017q4"
+        },
+        {
+        "packager": "arduino",
+        "name": "bossac",
+        "version": "1.7.0-arduino3"
+        },
+        {
+        "packager": "arduino",
+        "name": "bossac",
+        "version": "1.8.0-48-gb176eee"
+        },
+        {
+        "packager": "arduino",
+        "name": "openocd",
+        "version": "0.10.0-arduino7"
+        },
+        {
+        "packager": "arduino",
+        "name": "CMSIS",
+        "version": "4.5.0"
+        },
+        {
+        "packager": "arduino",
+        "name": "CMSIS-Atmel",
+        "version": "1.2.0"
+        },
+        {
+        "packager": "arduino",
+        "name": "arduinoOTA",
+        "version": "1.2.1"
+        }
+    ]
+}
