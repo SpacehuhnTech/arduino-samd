@@ -46,38 +46,38 @@ trinket_m0.build.ci_pin=-DDOTSTAR_CI=8
 trinket_m0.menu.keyboardid.default=Adafruit Trinket M0
 trinket_m0.menu.keyboardid.default.build.vid=0x239A
 trinket_m0.menu.keyboardid.default.build.pid=0x801E
-trinket_m0.menu.keyboardid.default.build.usb_product=Trinket M0
-trinket_m0.menu.keyboardid.default.build.usb_manufacturer=Adafruit
+trinket_m0.menu.keyboardid.default.build.usb_product="Trinket M0"
+trinket_m0.menu.keyboardid.default.build.usb_manufacturer="Adafruit"
 
 trinket_m0.menu.keyboardid.apple=Apple Aluminium Keyboard
 trinket_m0.menu.keyboardid.apple.build.vid=0x05ac
 trinket_m0.menu.keyboardid.apple.build.pid=0x0221
-trinket_m0.menu.keyboardid.apple.build.usb_product=Aluminium Keyboard
-trinket_m0.menu.keyboardid.apple.build.usb_manufacturer=Apple
+trinket_m0.menu.keyboardid.apple.build.usb_product="Aluminium Keyboard"
+trinket_m0.menu.keyboardid.apple.build.usb_manufacturer="Apple"
 
 trinket_m0.menu.keyboardid.appleint=Apple Internal Keyboard/Trackpad
 trinket_m0.menu.keyboardid.appleint.build.vid=0x05ac
 trinket_m0.menu.keyboardid.appleint.build.pid=0x0259
-trinket_m0.menu.keyboardid.appleint.build.usb_product=Internal Keyboard/Trackpad
-trinket_m0.menu.keyboardid.appleint.build.usb_manufacturer=Apple
+trinket_m0.menu.keyboardid.appleint.build.usb_product="Internal Keyboard/Trackpad"
+trinket_m0.menu.keyboardid.appleint.build.usb_manufacturer="Apple"
 
 trinket_m0.menu.keyboardid.logitechhid=Logitech USB Keyboard
 trinket_m0.menu.keyboardid.logitechhid.build.vid=0x046d
 trinket_m0.menu.keyboardid.logitechhid.build.pid=0xc316
-trinket_m0.menu.keyboardid.logitechhid.build.usb_product=USB Keyboard
-trinket_m0.menu.keyboardid.logitechhid.build.usb_manufacturer=Logitech
+trinket_m0.menu.keyboardid.logitechhid.build.usb_product="USB Keyboard"
+trinket_m0.menu.keyboardid.logitechhid.build.usb_manufacturer="Logitech"
 
 trinket_m0.menu.keyboardid.logitechgaming=Logitech G910 Keyboard
 trinket_m0.menu.keyboardid.logitechgaming.build.vid=0x046d
 trinket_m0.menu.keyboardid.logitechgaming.build.pid=0xc335
-trinket_m0.menu.keyboardid.logitechgaming.build.usb_product=G910 Keyboard
-trinket_m0.menu.keyboardid.logitechgaming.build.usb_manufacturer=Logitech
+trinket_m0.menu.keyboardid.logitechgaming.build.usb_product="G910 Keyboard"
+trinket_m0.menu.keyboardid.logitechgaming.build.usb_manufacturer="Logitech"
 
 trinket_m0.menu.keyboardid.ms=Microsoft USB Keyboard
 trinket_m0.menu.keyboardid.ms.build.vid=0x045e
 trinket_m0.menu.keyboardid.ms.build.pid=0xfff8
-trinket_m0.menu.keyboardid.ms.build.usb_product=USB Keyboard
-trinket_m0.menu.keyboardid.ms.build.usb_manufacturer=Microsoft
+trinket_m0.menu.keyboardid.ms.build.usb_product="USB Keyboard"
+trinket_m0.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
 
 # Protocol #
 trinket_m0.menu.protocol.auto=Auto (I2C & Serial)
@@ -213,38 +213,38 @@ project_sero.build.bridge_0=-DBRIDGE_0=0
 project_sero.menu.keyboardid.default=Adafruit Trinket M0
 project_sero.menu.keyboardid.default.build.vid=0x239A
 project_sero.menu.keyboardid.default.build.pid=0x801E
-project_sero.menu.keyboardid.default.build.usb_product=Trinket M0
-project_sero.menu.keyboardid.default.build.usb_manufacturer=Adafruit
+project_sero.menu.keyboardid.default.build.usb_product="Trinket M0"
+project_sero.menu.keyboardid.default.build.usb_manufacturer="Adafruit"
 
 project_sero.menu.keyboardid.apple=Apple Aluminium Keyboard
 project_sero.menu.keyboardid.apple.build.vid=0x05ac
 project_sero.menu.keyboardid.apple.build.pid=0x0221
-project_sero.menu.keyboardid.apple.build.usb_product=Aluminium Keyboard
-project_sero.menu.keyboardid.apple.build.usb_manufacturer=Apple
+project_sero.menu.keyboardid.apple.build.usb_product="Aluminium Keyboard"
+project_sero.menu.keyboardid.apple.build.usb_manufacturer="Apple"
 
 project_sero.menu.keyboardid.appleint=Apple Internal Keyboard/Trackpad
 project_sero.menu.keyboardid.appleint.build.vid=0x05ac
 project_sero.menu.keyboardid.appleint.build.pid=0x0259
-project_sero.menu.keyboardid.appleint.build.usb_product=Internal Keyboard/Trackpad
-project_sero.menu.keyboardid.appleint.build.usb_manufacturer=Apple
+project_sero.menu.keyboardid.appleint.build.usb_product="Internal Keyboard/Trackpad"
+project_sero.menu.keyboardid.appleint.build.usb_manufacturer="Apple"
 
 project_sero.menu.keyboardid.logitechhid=Logitech USB Keyboard
 project_sero.menu.keyboardid.logitechhid.build.vid=0x046d
 project_sero.menu.keyboardid.logitechhid.build.pid=0xc316
-project_sero.menu.keyboardid.logitechhid.build.usb_product=USB Keyboard
-project_sero.menu.keyboardid.logitechhid.build.usb_manufacturer=Logitech
+project_sero.menu.keyboardid.logitechhid.build.usb_product="USB Keyboard"
+project_sero.menu.keyboardid.logitechhid.build.usb_manufacturer="Logitech"
 
 project_sero.menu.keyboardid.logitechgaming=Logitech G910 Keyboard
 project_sero.menu.keyboardid.logitechgaming.build.vid=0x046d
 project_sero.menu.keyboardid.logitechgaming.build.pid=0xc335
-project_sero.menu.keyboardid.logitechgaming.build.usb_product=G910 Keyboard
-project_sero.menu.keyboardid.logitechgaming.build.usb_manufacturer=Logitech
+project_sero.menu.keyboardid.logitechgaming.build.usb_product="G910 Keyboard"
+project_sero.menu.keyboardid.logitechgaming.build.usb_manufacturer="Logitech"
 
 project_sero.menu.keyboardid.ms=Microsoft USB Keyboard
 project_sero.menu.keyboardid.ms.build.vid=0x045e
 project_sero.menu.keyboardid.ms.build.pid=0xfff8
-project_sero.menu.keyboardid.ms.build.usb_product=USB Keyboard
-project_sero.menu.keyboardid.ms.build.usb_manufacturer=Microsoft
+project_sero.menu.keyboardid.ms.build.usb_product="USB Keyboard"
+project_sero.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
 
 # Debug #
 project_sero.menu.debug.serial=Serial (115200b, newline)

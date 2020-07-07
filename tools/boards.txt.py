@@ -2,33 +2,6 @@
 
 boards = [
     {
-        "id": "trinket_m0",
-        "name": "Adafruit Trinket M0 (SAMD21)",
-        "preset": {
-            "di": 7,
-            "ci": 8,
-        },
-        "pins": {
-            0: "0 (A2)",
-            1: "1~ (A0)",
-            2: "2 (A1)",
-            3: "3 (A3) (RX)",
-            4: "4 (A4) (TX)",
-            7: "7 (DI)",
-            8: "8 (CI)",
-            19: "19 (SWCLK)",
-            20: "20 (SWDIO)",
-        },
-        "menu": {
-            "keyboard": True,
-            "protocol": True,
-            "debug": True,
-            "bridge": True,
-            "bridge_button": True,
-            "bridge_reset": True,
-            "bridge_pin0": True,
-        },
-    },{
         "id": "project_sero",
         "name": "Project Sero (SAMD)",
         "preset": {
@@ -54,6 +27,33 @@ boards = [
         "menu": {
             "keyboard": True,
             "debug": True,
+        },
+    },{
+        "id": "trinket_m0",
+        "name": "Adafruit Trinket M0 (SAMD21)",
+        "preset": {
+            "di": 7,
+            "ci": 8,
+        },
+        "pins": {
+            0: "0 (A2)",
+            1: "1~ (A0)",
+            2: "2 (A1)",
+            3: "3 (A3) (RX)",
+            4: "4 (A4) (TX)",
+            7: "7 (DI)",
+            8: "8 (CI)",
+            19: "19 (SWCLK)",
+            20: "20 (SWDIO)",
+        },
+        "menu": {
+            "keyboard": True,
+            "protocol": True,
+            "debug": True,
+            "bridge": True,
+            "bridge_button": True,
+            "bridge_reset": True,
+            "bridge_pin0": True,
         },
     }
 ]
@@ -210,8 +210,8 @@ def keyboard_menu(id):
         print(f"{id}.menu.keyboardid.{i}={keyboard['usb_manufacturer']} {keyboard['usb_product']}")
         print(f"{id}.menu.keyboardid.{i}.build.vid={keyboard['vid']}")
         print(f"{id}.menu.keyboardid.{i}.build.pid={keyboard['pid']}")
-        print(f"{id}.menu.keyboardid.{i}.build.usb_product={keyboard['usb_product']}")
-        print(f"{id}.menu.keyboardid.{i}.build.usb_manufacturer={keyboard['usb_manufacturer']}")
+        print(f"{id}.menu.keyboardid.{i}.build.usb_product=\"{keyboard['usb_product']}\"")
+        print(f"{id}.menu.keyboardid.{i}.build.usb_manufacturer=\"{keyboard['usb_manufacturer']}\"")
         print()
 
 def keyboard_preset(id, value):
