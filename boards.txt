@@ -11,9 +11,9 @@ menu.bridgebutton=Serial Bridge Enable Pin
 menu.bridgerst=Serial Bridge Reset Pin
 menu.bridge0=Serial Bridge GPIO-0 Pin
 
-########## Adafruit Trinket M0 ##########
+########## Adafruit Trinket M0 (SAMD21) ##########
 
-trinket_m0.name=Adafruit Trinket M0
+trinket_m0.name=Adafruit Trinket M0 (SAMD21)
 
 trinket_m0.build.variant=trinket_m0
 trinket_m0.upload.tool=bossac

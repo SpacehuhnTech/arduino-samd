@@ -3,7 +3,7 @@
 boards = [
     {
         "id": "trinket_m0",
-        "name": "Adafruit Trinket M0",
+        "name": "Adafruit Trinket M0 (SAMD21)",
         "preset": {
             "di": 7,
             "ci": 8,
