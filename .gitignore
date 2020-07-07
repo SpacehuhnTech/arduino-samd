@@ -4,3 +4,5 @@
 bootloaders/*/build/
 *~
 .DS_Store
+
+cores/arduino/TinyUSB/
