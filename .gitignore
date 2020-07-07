@@ -3,3 +3,4 @@
 
 bootloaders/*/build/
 *~
+.DS_Store

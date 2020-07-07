@@ -27,7 +27,6 @@
 // using a ring buffer (I think), in which head is the index of the location
 // to which to write the next incoming character and tail is the index of the
 // location from which to read.
-
 #ifndef SERIAL_BUFFER_SIZE
 #define SERIAL_BUFFER_SIZE 256
 #endif

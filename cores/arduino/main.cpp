@@ -39,10 +39,7 @@ int main( void )
   initVariant();
 
   delay(1);
-
-#if defined(USE_TINYUSB)
-  Adafruit_TinyUSB_Core_init();
-#elif defined(USBCON)
+#if defined(USBCON)
   USBDevice.init();
   USBDevice.attach();
 #endif
@@ -52,21 +49,8 @@ int main( void )
   for (;;)
   {
     loop();
-    yield(); // yield run usb background task
-
     if (serialEventRun) serialEventRun();
   }
 
   return 0;
 }
-
-#if defined(USE_TINYUSB)
-
-// run TinyUSB background task when yield()
-extern  "C" void yield(void)
-{
-  tud_task();
-  tud_cdc_write_flush();
-}
-
-#endif

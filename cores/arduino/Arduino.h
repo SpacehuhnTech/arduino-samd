@@ -97,33 +97,8 @@ void loop( void ) ;
 #undef abs
 #endif // abs
 
-#ifdef __cplusplus
-  template<class T, class L> 
-  auto min(const T& a, const L& b) -> decltype((b < a) ? b : a)
-  {
-    return (b < a) ? b : a;
-  }
-
-  template<class T, class L> 
-  auto max(const T& a, const L& b) -> decltype((b < a) ? b : a)
-  {
-    return (a < b) ? b : a;
-  }
-#else
-#ifndef min
-#define min(a,b) \
-   ({ __typeof__ (a) _a = (a); \
-       __typeof__ (b) _b = (b); \
-     _a < _b ? _a : _b; })
-#endif
-#ifndef max
-#define max(a,b) \
-   ({ __typeof__ (a) _a = (a); \
-       __typeof__ (b) _b = (b); \
-     _a > _b ? _a : _b; })
-#endif
-#endif
-
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
 #define abs(x) ((x)>0?(x):-(x))
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
 #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
@@ -149,14 +124,19 @@ void loop( void ) ;
 #define digitalPinToInterrupt(P)   ( P )
 #endif
 
-// USB
-#ifdef USE_TINYUSB
-#include "Adafruit_TinyUSB_Core.h"
-#else
+// Allows publishing the Beta core under samd-beta / arduino organization
+#ifndef ARDUINO_ARCH_SAMD
+#define ARDUINO_ARCH_SAMD
+#endif
+
+// USB Device
 #include "USB/USBDesc.h"
 #include "USB/USBCore.h"
 #include "USB/USBAPI.h"
 #include "USB/USB_host.h"
+
+#ifdef __cplusplus
+  #include "USB/CDC.h"
 #endif
 
 #endif // Arduino_h

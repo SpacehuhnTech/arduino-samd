@@ -1,6 +1,5 @@
 /*
   Copyright (c) 2015 Arduino LLC.  All right reserved.
-  SAMD51 support added by Adafruit - Copyright (c) 2018 Dean Miller for Adafruit Industries
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -20,11 +19,7 @@
 #include "Tone.h"
 #include "variant.h"
 
-#if defined(__SAMD51__) 
-#define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.SYNCBUSY.bit.ENABLE);
-#else
 #define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.STATUS.bit.SYNCBUSY);
-#endif
 
 uint32_t toneMaxFrequency = F_CPU / 2;
 uint32_t lastOutputPin = 0xFFFFFFFF;
@@ -36,22 +31,12 @@ volatile int64_t toggleCount;
 volatile bool toneIsActive = false;
 volatile bool firstTimeRunning = false;
 
-#if defined(__SAMD51__)
-#define TONE_TC         TC0
-#define TONE_TC_IRQn    TC0_IRQn
-#define TONE_TC_GCLK_ID	TC0_GCLK_ID
-#else
 #define TONE_TC         TC5
 #define TONE_TC_IRQn    TC5_IRQn
-#endif
 #define TONE_TC_TOP     0xFFFF
 #define TONE_TC_CHANNEL 0
 
-#if defined(__SAMD51__)
-void TC0_Handler (void) __attribute__ ((weak, alias("Tone_Handler")));
-#else
 void TC5_Handler (void) __attribute__ ((weak, alias("Tone_Handler")));
-#endif
 
 static inline void resetTC (Tc* TCx)
 {
@@ -80,19 +65,12 @@ void tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
   {
     firstTimeRunning = true;
     
-    NVIC_SetPriority(TONE_TC_IRQn, 5);
-
-#if defined(__SAMD51__)
-    GCLK->PCHCTRL[TONE_TC_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0_Val | (1 << GCLK_PCHCTRL_CHEN_Pos);
-#else
+    NVIC_SetPriority(TONE_TC_IRQn, 0);
+      
     // Enable GCLK for TC4 and TC5 (timer counter input clock)
     GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID(GCM_TC4_TC5));
     while (GCLK->STATUS.bit.SYNCBUSY);
-#endif
   }
-
-  //if it's a rest, set to 1Hz (below audio range)
-  frequency = (frequency > 0 ? frequency : 1);
   
   if (toneIsActive && (outputPin != lastOutputPin))
     noTone(lastOutputPin);
@@ -142,12 +120,7 @@ void tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
 
   uint16_t tmpReg = 0;
   tmpReg |= TC_CTRLA_MODE_COUNT16;  // Set Timer counter Mode to 16 bits
-  
-#if defined(__SAMD51__)
-	TONE_TC->COUNT16.WAVE.reg = TC_WAVE_WAVEGEN_MFRQ;  // Set TONE_TC mode as match frequency
-#else
   tmpReg |= TC_CTRLA_WAVEGEN_MFRQ;  // Set TONE_TC mode as match frequency
-#endif
   tmpReg |= prescalerConfigBits;
   TONE_TC->COUNT16.CTRLA.reg |= tmpReg;
   WAIT_TC16_REGS_SYNC(TONE_TC)
@@ -167,8 +140,8 @@ void tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
     lastOutputPin = outputPin;
     digitalWrite(outputPin, LOW);
     pinMode(outputPin, OUTPUT);
+    toneIsActive = true;
   }
-  toneIsActive = true;
 
   // Enable TONE_TC
   TONE_TC->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
@@ -179,9 +152,19 @@ void tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
 
 void noTone (uint32_t outputPin)
 {
-  resetTC(TONE_TC);
-  digitalWrite(outputPin, LOW);
-  toneIsActive = false;
+  /* 'tone' need to run at least once in order to enable GCLK for
+   * the timers used for the tone-functionality. If 'noTone' is called
+   * without ever calling 'tone' before then 'WAIT_TC16_REGS_SYNC(TCx)'
+   * will wait infinitely. The variable 'firstTimeRunning' is set the
+   * 1st time 'tone' is set so it can be used to detect wether or not
+   * 'tone' has been called before.
+   */
+  if(firstTimeRunning)
+  {
+    resetTC(TONE_TC);
+    digitalWrite(outputPin, LOW);
+    toneIsActive = false;
+  }
 }
 
 #ifdef __cplusplus
