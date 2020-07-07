@@ -1,6 +1,5 @@
 /*
   Copyright (c) 2015 Arduino LLC.  All right reserved.
-  SAMD51 support added by Adafruit - Copyright (c) 2018 Dean Miller for Adafruit Industries
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -21,23 +20,12 @@
 
 void analogReadCorrection (int offset, uint16_t gain)
 {
-  Adc *adc;
-#if defined (__SAMD51__)
-adc = ADC0;
-#else
-adc = ADC;
-#endif
   // Set correction values
-  adc->OFFSETCORR.reg = ADC_OFFSETCORR_OFFSETCORR(offset);
-  adc->GAINCORR.reg = ADC_GAINCORR_GAINCORR(gain);
+  ADC->OFFSETCORR.reg = ADC_OFFSETCORR_OFFSETCORR(offset);
+  ADC->GAINCORR.reg = ADC_GAINCORR_GAINCORR(gain);
 
   // Enable digital correction logic
-  adc->CTRLB.bit.CORREN = 1;
-
-#if defined (__SAMD51__)
-  while(adc->SYNCBUSY.bit.OFFSETCORR || adc->SYNCBUSY.bit.GAINCORR);
-#else
-  while(adc->STATUS.bit.SYNCBUSY);
-#endif
+  ADC->CTRLB.bit.CORREN = 1;
+  while(ADC->STATUS.bit.SYNCBUSY);
 }
 
