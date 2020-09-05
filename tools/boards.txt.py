@@ -3,7 +3,7 @@
 boards = [
     {
         "id": "project_sero",
-        "name": "Project Sero (SAMD)",
+        "name": "Malduino W (SAMD21)",
         "preset": {
             "di": 7,
             "ci": 8,

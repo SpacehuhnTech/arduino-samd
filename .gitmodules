@@ -1,0 +1,9 @@
+[submodule "libraries/FlashStorage"]
+	path = libraries/FlashStorage
+	url = https://github.com/cmaglie/FlashStorage
+[submodule "libraries/Adafruit_DotStar"]
+	path = libraries/Adafruit_DotStar
+	url = https://github.com/adafruit/Adafruit_DotStar
+[submodule "libraries/Adafruit_NeoPixel"]
+	path = libraries/Adafruit_NeoPixel
+	url = https://github.com/adafruit/Adafruit_NeoPixel
