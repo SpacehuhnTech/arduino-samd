@@ -84,8 +84,8 @@ void setup()
   while (!SERIAL_PORT_MONITOR); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
   SERIAL_PORT_MONITOR.println("Mouse Controller Program started");
 
-  if (usb.Init() == (uint32_t)-1)
-    SerialDebug.println("USB Host did not start.");
+  if (usb.Init() == -1)
+      SERIAL_PORT_MONITOR.println("OSC did not start.");
 
   delay( 20 );
 }

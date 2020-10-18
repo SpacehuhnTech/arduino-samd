@@ -136,21 +136,8 @@ class SPIClass {
   void setDataMode(uint8_t uc_mode);
   void setClockDivider(uint8_t uc_div);
 
-  // SERCOM lookup functions are available on both SAMD51 and 21.
-  volatile uint32_t *getDataRegister(void);
-  int getDMAC_ID_TX(void);
-  int getDMAC_ID_RX(void);
-  uint8_t getSercomIndex(void) { return _p_sercom->getSercomIndex(); };
-#if defined(__SAMD51__)
-  // SERCOM clock source override is available only on SAMD51.
-  void setClockSource(SercomClockSource clk);
-#else
-  // On SAMD21, this compiles to nothing, so user code doesn't need to
-  // check and conditionally compile lines for different architectures.
-  void setClockSource(SercomClockSource clk) { (void)clk; };
-#endif // end __SAMD51__
-
   private:
+  void init();
   void config(SPISettings settings);
 
   SERCOM *_p_sercom;
@@ -167,18 +154,6 @@ class SPIClass {
   uint8_t interruptMode;
   char interruptSave;
   uint32_t interruptMask;
-
-  // transfer(txbuf, rxbuf, count, block) uses DMA when possible
-  Adafruit_ZeroDMA readChannel;
-  Adafruit_ZeroDMA writeChannel;
-  DmacDescriptor  *firstReadDescriptor   = NULL;  // List entry point
-  DmacDescriptor  *firstWriteDescriptor  = NULL;
-  DmacDescriptor  *extraReadDescriptors  = NULL;  // Add'l descriptors
-  DmacDescriptor  *extraWriteDescriptors = NULL;
-  bool             use_dma               = false; // true on successful alloc
-  volatile bool    dma_busy              = false;
-  void             dmaAllocate(void);
-  static void      dmaCallback(Adafruit_ZeroDMA *dma);
 };
 
 #if SPI_INTERFACES_COUNT > 0
