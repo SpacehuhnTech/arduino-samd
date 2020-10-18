@@ -19,8 +19,6 @@
 #include "Tone.h"
 #include "variant.h"
 
-#define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.STATUS.bit.SYNCBUSY);
-
 uint32_t toneMaxFrequency = F_CPU / 2;
 uint32_t lastOutputPin = 0xFFFFFFFF;
 
@@ -31,12 +29,24 @@ volatile int64_t toggleCount;
 volatile bool toneIsActive = false;
 volatile bool firstTimeRunning = false;
 
-#define TONE_TC         TC5
-#define TONE_TC_IRQn    TC5_IRQn
+#if defined(__SAMD51__)
+  #define TONE_TC         TC0
+  #define TONE_TC_IRQn    TC0_IRQn
+  #define TONE_TC_GCLK_ID	TC0_GCLK_ID
+  #define Tone_Handler    TC0_Handler
+
+  #define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.SYNCBUSY.bit.ENABLE);
+
+#else
+  #define TONE_TC         TC5
+  #define TONE_TC_IRQn    TC5_IRQn
+  #define Tone_Handler    TC5_Handler
+
+  #define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.STATUS.bit.SYNCBUSY);
+#endif
+
 #define TONE_TC_TOP     0xFFFF
 #define TONE_TC_CHANNEL 0
-
-void TC5_Handler (void) __attribute__ ((weak, alias("Tone_Handler")));
 
 static inline void resetTC (Tc* TCx)
 {
@@ -57,14 +67,14 @@ void toneAccurateClock (uint32_t accurateSystemCoreClockFrequency)
 
 void tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
 {
-  
+
   // Avoid divide by zero error by calling 'noTone' instead
   if (frequency == 0)
   {
     noTone(outputPin);
     return;
   }
-  
+
   // Configure interrupt request
   NVIC_DisableIRQ(TONE_TC_IRQn);
   NVIC_ClearPendingIRQ(TONE_TC_IRQn);

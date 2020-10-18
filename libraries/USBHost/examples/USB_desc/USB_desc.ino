@@ -64,8 +64,9 @@ void setup()
   while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
   SERIAL_PORT_MONITOR.println("Start USB Desc");
 
-  if (usb.Init() == -1)
-      SERIAL_PORT_MONITOR.println("OSC did not start.");
+  SerialDebug.println("Initializing USB");
+  if (usb.Init() == (uint32_t)-1)
+    SerialDebug.println("USBhost did not start.");
 
   delay( 20 );
 
@@ -166,6 +167,7 @@ byte getdevdescr( byte addr, byte &num_conf )
 
 void printhubdescr(uint8_t *descrptr, uint8_t addr)
 {
+    (void)addr;
     HubDescriptor  *pHub = (HubDescriptor*) descrptr;
     uint8_t        len = *((uint8_t*)descrptr);
 
@@ -214,10 +216,11 @@ byte getconfdescr( byte addr, byte conf )
 {
   uint8_t buf[ BUFSIZE ];
   uint8_t* buf_ptr = buf;
-  byte rcode;
+  byte rcode; // FIXME -- code does not actually check return code (no error handling!)
   byte descr_length;
   byte descr_type;
   uint16_t total_length;
+  // FIXME -- no check of return code from usb.getConfDescr()
   rcode = usb.getConfDescr( addr, 0, 4, conf, buf );  //get total length
   LOBYTE( total_length ) = buf[ 2 ];
   HIBYTE( total_length ) = buf[ 3 ];
@@ -225,6 +228,7 @@ byte getconfdescr( byte addr, byte conf )
     printProgStr(Conf_Trunc_str);
     total_length = sizeof(buf);
   }
+  // FIXME -- no check of return code from usb.getConfDescr()
   rcode = usb.getConfDescr( addr, 0, total_length, conf, buf ); //get the whole descriptor
   while( buf_ptr < buf + total_length ) {  //parsing descriptors
     descr_length = *( buf_ptr );

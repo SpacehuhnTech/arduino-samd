@@ -202,6 +202,7 @@ class SERCOM
 		bool isSlaveWIRE( void ) ;
 		bool isBusIdleWIRE( void ) ;
 		bool isBusOwnerWIRE( void ) ;
+		bool isBusUnknownWIRE( void ) ;
 		bool isArbLostWIRE( void );
 		bool isBusBusyWIRE( void );
 		bool isDataReadyWIRE( void ) ;
@@ -212,6 +213,22 @@ class SERCOM
     bool isRXNackReceivedWIRE( void ) ;
 		int availableWIRE( void ) ;
 		uint8_t readDataWIRE( void ) ;
+		int8_t getSercomIndex(void);
+#if defined(__SAMD51__)
+		// SERCOM clock source override is only available on
+		// SAMD51 (not 21) ... but these functions are declared
+		// regardless so user code doesn't need ifdefs or lengthy
+		// comments explaining the different situations -- these
+		// just compile to nothing on SAMD21.
+		void setClockSource(int8_t idx, SercomClockSource src, bool core);
+		SercomClockSource getClockSource(void) { return clockSource; };
+		uint32_t getFreqRef(void) { return freqRef; };
+#else
+		// The equivalent SAMD21 dummy functions...
+		void setClockSource(int8_t idx, SercomClockSource src, bool core) { (void)idx; (void)src; (void)core; };
+		SercomClockSource getClockSource(void) { return SERCOM_CLOCK_SOURCE_FCPU; };
+		uint32_t getFreqRef(void) { return F_CPU; };
+#endif
 
 	private:
 		Sercom* sercom;
