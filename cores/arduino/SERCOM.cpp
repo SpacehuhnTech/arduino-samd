@@ -507,7 +507,7 @@ bool SERCOM::startTransmissionWIRE(uint8_t address, SercomWireReadWriteFlag flag
   // possible bus states.
   if(!isBusOwnerWIRE())
   {
-    if( isBusBusyWIRE() || (isArbLostWIRE() && !isBusIdleWIRE()) || isBusUnknownWIRE() )
+    if( isBusBusyWIRE() || (isArbLostWIRE() && !isBusIdleWIRE()) )
     {
       return false;
     }
@@ -611,11 +611,6 @@ bool SERCOM::isBusIdleWIRE( void )
 bool SERCOM::isBusOwnerWIRE( void )
 {
   return sercom->I2CM.STATUS.bit.BUSSTATE == WIRE_OWNER_STATE;
-}
-
-bool SERCOM::isBusUnknownWIRE( void )
-{
-  return sercom->I2CM.STATUS.bit.BUSSTATE == WIRE_UNKNOWN_STATE;
 }
 
 bool SERCOM::isArbLostWIRE( void )
