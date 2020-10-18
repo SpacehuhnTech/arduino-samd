@@ -11,11 +11,93 @@ menu.bridgebutton=Serial Bridge Enable Pin
 menu.bridgerst=Serial Bridge Reset Pin
 menu.bridge0=Serial Bridge GPIO-0 Pin
 
+########## Malduino W (SAMD21) ##########
+
+malduino_w.name=Malduino W (SAMD21)
+
+malduino_w.upload.tool=bossac
+malduino_w.upload.protocol=sam-ba
+malduino_w.upload.maximum_size=262144
+malduino_w.upload.offset=0x2000
+malduino_w.upload.use_1200bps_touch=true
+malduino_w.upload.wait_for_upload_port=true
+malduino_w.upload.native_usb=true
+malduino_w.build.variant=malduino_w
+malduino_w.build.mcu=cortex-m0plus
+malduino_w.build.f_cpu=48000000L
+malduino_w.build.board=MALDUINO_W
+malduino_w.build.core=arduino
+malduino_w.build.extra_flags=-DCRYSTALLESS -DMALDUINO_W -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}
+malduino_w.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+malduino_w.build.openocdscript=openocd_scripts/trinket_m0.cfg
+malduino_w.bootloader.tool=openocd
+malduino_w.bootloader.file=malduinoW/bootloader-malduino_w-v3.7.0
+# Protocol #
+malduino_w.build.protocol_flags=-DENABLE_SERIAL
+
+# Dotstar DI #
+malduino_w.build.di_pin=-DDOTSTAR -DDOTSTAR_NUM=1 -DDOTSTAR_DI=7
+
+# Dotstar CI #
+malduino_w.build.ci_pin=-DDOTSTAR_CI=8
+
+# Serial Bridge #
+malduino_w.build.bridge_flags=-DBRIDGE_ENABLE -DBRIDGE_PORT=Serial1 -DBRIDGE_0_INVERTED
+
+malduino_w.build.bridge_button=-DBRIDGE_SWITCH=1
+
+malduino_w.build.bridge_rst=-DBRIDGE_RST=2
+
+malduino_w.build.bridge_0=-DBRIDGE_0=0
+
+# Keyboard ID #
+malduino_w.menu.keyboardid.default=Maltronics Malduino W
+malduino_w.menu.keyboardid.default.build.vid=0x16D0
+malduino_w.menu.keyboardid.default.build.pid=0x0FAC
+malduino_w.menu.keyboardid.default.build.usb_product="Malduino W"
+malduino_w.menu.keyboardid.default.build.usb_manufacturer="Maltronics"
+
+malduino_w.menu.keyboardid.apple=Apple Aluminium Keyboard
+malduino_w.menu.keyboardid.apple.build.vid=0x05ac
+malduino_w.menu.keyboardid.apple.build.pid=0x0221
+malduino_w.menu.keyboardid.apple.build.usb_product="Aluminium Keyboard"
+malduino_w.menu.keyboardid.apple.build.usb_manufacturer="Apple"
+
+malduino_w.menu.keyboardid.appleint=Apple Internal Keyboard/Trackpad
+malduino_w.menu.keyboardid.appleint.build.vid=0x05ac
+malduino_w.menu.keyboardid.appleint.build.pid=0x0259
+malduino_w.menu.keyboardid.appleint.build.usb_product="Internal Keyboard/Trackpad"
+malduino_w.menu.keyboardid.appleint.build.usb_manufacturer="Apple"
+
+malduino_w.menu.keyboardid.logitechhid=Logitech USB Keyboard
+malduino_w.menu.keyboardid.logitechhid.build.vid=0x046d
+malduino_w.menu.keyboardid.logitechhid.build.pid=0xc316
+malduino_w.menu.keyboardid.logitechhid.build.usb_product="USB Keyboard"
+malduino_w.menu.keyboardid.logitechhid.build.usb_manufacturer="Logitech"
+
+malduino_w.menu.keyboardid.logitechgaming=Logitech G910 Keyboard
+malduino_w.menu.keyboardid.logitechgaming.build.vid=0x046d
+malduino_w.menu.keyboardid.logitechgaming.build.pid=0xc335
+malduino_w.menu.keyboardid.logitechgaming.build.usb_product="G910 Keyboard"
+malduino_w.menu.keyboardid.logitechgaming.build.usb_manufacturer="Logitech"
+
+malduino_w.menu.keyboardid.ms=Microsoft USB Keyboard
+malduino_w.menu.keyboardid.ms.build.vid=0x045e
+malduino_w.menu.keyboardid.ms.build.pid=0xfff8
+malduino_w.menu.keyboardid.ms.build.usb_product="USB Keyboard"
+malduino_w.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
+
+# Debug #
+malduino_w.menu.debug.serial=Serial (115200b, newline)
+malduino_w.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
+
+malduino_w.menu.debug.disabled=Disabled
+malduino_w.menu.debug.disabled.build.debug_flags=
+
 ########## Adafruit Trinket M0 (SAMD21) ##########
 
 trinket_m0.name=Adafruit Trinket M0 (SAMD21)
 
-trinket_m0.build.variant=trinket_m0
 trinket_m0.upload.tool=bossac
 trinket_m0.upload.protocol=sam-ba
 trinket_m0.upload.maximum_size=262144
@@ -23,10 +105,7 @@ trinket_m0.upload.offset=0x2000
 trinket_m0.upload.use_1200bps_touch=true
 trinket_m0.upload.wait_for_upload_port=true
 trinket_m0.upload.native_usb=true
-
-trinket_m0.bootloader.tool=openocd
-trinket_m0.bootloader.file=trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin
-
+trinket_m0.build.variant=trinket_m0
 trinket_m0.build.mcu=cortex-m0plus
 trinket_m0.build.f_cpu=48000000L
 trinket_m0.build.board=TRINKET_M0
@@ -34,8 +113,8 @@ trinket_m0.build.core=arduino
 trinket_m0.build.extra_flags=-DCRYSTALLESS -DADAFRUIT_TRINKET_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}
 trinket_m0.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
 trinket_m0.build.openocdscript=openocd_scripts/trinket_m0.cfg
-
-
+trinket_m0.bootloader.tool=openocd
+trinket_m0.bootloader.file=trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin
 # Dotstar DI #
 trinket_m0.build.di_pin=-DDOTSTAR -DDOTSTAR_NUM=1 -DDOTSTAR_DI=7
 
@@ -165,91 +244,4 @@ trinket_m0.menu.bridge0.19=19 (SWCLK)
 trinket_m0.menu.bridge0.19.build.bridge_0=-DBRIDGE_0=19
 trinket_m0.menu.bridge0.20=20 (SWDIO)
 trinket_m0.menu.bridge0.20.build.bridge_0=-DBRIDGE_0=20
-
-########## Project Sero (SAMD) ##########
-
-project_sero.name=Project Sero (SAMD)
-
-project_sero.build.variant=project_sero
-project_sero.upload.tool=bossac
-project_sero.upload.protocol=sam-ba
-project_sero.upload.maximum_size=262144
-project_sero.upload.offset=0x2000
-project_sero.upload.use_1200bps_touch=true
-project_sero.upload.wait_for_upload_port=true
-project_sero.upload.native_usb=true
-
-project_sero.bootloader.tool=openocd
-project_sero.bootloader.file=trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin
-
-project_sero.build.mcu=cortex-m0plus
-project_sero.build.f_cpu=48000000L
-project_sero.build.board=TRINKET_M0
-project_sero.build.core=arduino
-project_sero.build.extra_flags=-DCRYSTALLESS -DADAFRUIT_TRINKET_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}
-project_sero.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
-project_sero.build.openocdscript=openocd_scripts/trinket_m0.cfg
-
-
-# Protocol #
-project_sero.build.protocol_flags=-DENABLE_SERIAL
-
-# Dotstar DI #
-project_sero.build.di_pin=-DDOTSTAR -DDOTSTAR_NUM=1 -DDOTSTAR_DI=7
-
-# Dotstar CI #
-project_sero.build.ci_pin=-DDOTSTAR_CI=8
-
-# Serial Bridge #
-project_sero.build.bridge_flags=-DBRIDGE_ENABLE -DBRIDGE_PORT=Serial1 -DBRIDGE_0_INVERTED
-
-project_sero.build.bridge_button=-DBRIDGE_SWITCH=1
-
-project_sero.build.bridge_rst=-DBRIDGE_RST=2
-
-project_sero.build.bridge_0=-DBRIDGE_0=0
-
-# Keyboard ID #
-project_sero.menu.keyboardid.default=Adafruit Trinket M0
-project_sero.menu.keyboardid.default.build.vid=0x239A
-project_sero.menu.keyboardid.default.build.pid=0x801E
-project_sero.menu.keyboardid.default.build.usb_product="Trinket M0"
-project_sero.menu.keyboardid.default.build.usb_manufacturer="Adafruit"
-
-project_sero.menu.keyboardid.apple=Apple Aluminium Keyboard
-project_sero.menu.keyboardid.apple.build.vid=0x05ac
-project_sero.menu.keyboardid.apple.build.pid=0x0221
-project_sero.menu.keyboardid.apple.build.usb_product="Aluminium Keyboard"
-project_sero.menu.keyboardid.apple.build.usb_manufacturer="Apple"
-
-project_sero.menu.keyboardid.appleint=Apple Internal Keyboard/Trackpad
-project_sero.menu.keyboardid.appleint.build.vid=0x05ac
-project_sero.menu.keyboardid.appleint.build.pid=0x0259
-project_sero.menu.keyboardid.appleint.build.usb_product="Internal Keyboard/Trackpad"
-project_sero.menu.keyboardid.appleint.build.usb_manufacturer="Apple"
-
-project_sero.menu.keyboardid.logitechhid=Logitech USB Keyboard
-project_sero.menu.keyboardid.logitechhid.build.vid=0x046d
-project_sero.menu.keyboardid.logitechhid.build.pid=0xc316
-project_sero.menu.keyboardid.logitechhid.build.usb_product="USB Keyboard"
-project_sero.menu.keyboardid.logitechhid.build.usb_manufacturer="Logitech"
-
-project_sero.menu.keyboardid.logitechgaming=Logitech G910 Keyboard
-project_sero.menu.keyboardid.logitechgaming.build.vid=0x046d
-project_sero.menu.keyboardid.logitechgaming.build.pid=0xc335
-project_sero.menu.keyboardid.logitechgaming.build.usb_product="G910 Keyboard"
-project_sero.menu.keyboardid.logitechgaming.build.usb_manufacturer="Logitech"
-
-project_sero.menu.keyboardid.ms=Microsoft USB Keyboard
-project_sero.menu.keyboardid.ms.build.vid=0x045e
-project_sero.menu.keyboardid.ms.build.pid=0xfff8
-project_sero.menu.keyboardid.ms.build.usb_product="USB Keyboard"
-project_sero.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
-
-# Debug #
-project_sero.menu.debug.serial=Serial (115200b, newline)
-project_sero.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
-
-project_sero.menu.debug.disabled=Disabled
-project_sero.menu.debug.disabled.build.debug_flags=
 

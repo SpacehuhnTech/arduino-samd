@@ -2,8 +2,30 @@
 
 boards = [
     {
-        "id": "project_sero",
+        "id": "malduino_w",
         "name": "Malduino W (SAMD21)",
+        "upload": {
+            "tool": "bossac",
+            "protocol": "sam-ba",
+            "maximum_size": "262144",
+            "offset": "0x2000",
+            "use_1200bps_touch": "true",
+            "wait_for_upload_port": "true",
+            "native_usb": "true",
+        },
+        "build": {
+            "mcu": "cortex-m0plus",
+            "f_cpu": "48000000L",
+            "board": "MALDUINO_W",
+            "core": "arduino",
+            "extra_flags": "-DCRYSTALLESS -DMALDUINO_W -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}",
+            "ldscript": "linker_scripts/gcc/flash_with_bootloader.ld",
+            "openocdscript": "openocd_scripts/trinket_m0.cfg",
+        },
+        "bootloader": {
+            "tool": "openocd",
+            "file": "malduinoW/bootloader-malduino_w-v3.7.0",
+        },
         "preset": {
             "di": 7,
             "ci": 8,
@@ -24,6 +46,12 @@ boards = [
             19: "19 (SWCLK)",
             20: "20 (SWDIO)",
         },
+        "keyboard": {
+            "usb_manufacturer": "Maltronics",
+            "usb_product": "Malduino W",
+            "vid": "0x16D0",
+            "pid": "0x0FAC",
+        },
         "menu": {
             "keyboard": True,
             "debug": True,
@@ -31,6 +59,28 @@ boards = [
     },{
         "id": "trinket_m0",
         "name": "Adafruit Trinket M0 (SAMD21)",
+        "upload": {
+            "tool": "bossac",
+            "protocol": "sam-ba",
+            "maximum_size": "262144",
+            "offset": "0x2000",
+            "use_1200bps_touch": "true",
+            "wait_for_upload_port": "true",
+            "native_usb": "true",
+        },
+        "build": {
+            "mcu": "cortex-m0plus",
+            "f_cpu": "48000000L",
+            "board": "TRINKET_M0",
+            "core": "arduino",
+            "extra_flags": "-DCRYSTALLESS -DADAFRUIT_TRINKET_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}",
+            "ldscript": "linker_scripts/gcc/flash_with_bootloader.ld",
+            "openocdscript": "openocd_scripts/trinket_m0.cfg",
+        },
+        "bootloader": {
+            "tool": "openocd",
+            "file": "trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin",
+        },
         "preset": {
             "di": 7,
             "ci": 8,
@@ -45,6 +95,12 @@ boards = [
             8: "8 (CI)",
             19: "19 (SWCLK)",
             20: "20 (SWDIO)",
+        },
+        "keyboard": {
+            "usb_manufacturer": "Adafruit",
+            "usb_product": "Trinket M0",
+            "vid": "0x239A",
+            "pid": "0x801E",
         },
         "menu": {
             "keyboard": True,
@@ -71,38 +127,7 @@ menus = {
     "bridge0": "Serial Bridge GPIO-0 Pin",
 }
 
-defaults = {
-    "upload": {
-        "tool": "bossac",
-        "protocol": "sam-ba",
-        "maximum_size": "262144",
-        "offset": "0x2000",
-        "use_1200bps_touch": "true",
-        "wait_for_upload_port": "true",
-        "native_usb": "true",
-    },
-    "bootloader": {
-        "tool": "openocd",
-        "file": "trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin",
-    },
-    "build": {
-        "mcu": "cortex-m0plus",
-        "f_cpu": "48000000L",
-        "board": "TRINKET_M0",
-        "core": "arduino",
-        "extra_flags": "-DCRYSTALLESS -DADAFRUIT_TRINKET_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}",
-        "ldscript": "linker_scripts/gcc/flash_with_bootloader.ld",
-        "openocdscript": "openocd_scripts/trinket_m0.cfg",
-    },
-}
-
 keyboards = {
-    "default" : {
-        "usb_manufacturer": "Adafruit",
-        "usb_product": "Trinket M0",
-        "vid": "0x239A",
-        "pid": "0x801E",
-    },
     "apple" : {
         "usb_manufacturer": "Apple",
         "usb_product": "Aluminium Keyboard",
@@ -186,25 +211,43 @@ def menu_names():
     print()
 
 # Board Flags
-def board_flags(id, name):
+def board_flags(board):
+    id = board['id']
+    name = board['name']
+
     print(f"########## {name} ##########")
     print()
     print(f"{id}.name={name}")
     print()
 
+    # Upload
+    upload = board["upload"]
+    for key in upload:
+        print(f"{id}.upload.{key}={upload[key]}")
+
+    # Build
     print(f"{id}.build.variant={id}")
 
-    for i in defaults:
-        category = defaults[i]
-        for j in category:
-            print(f"{id}.{i}.{j}={category[j]}")
-        print()
-    print()
+    build = board["build"]
+    for key in build:
+        print(f"{id}.build.{key}={build[key]}")
+
+    # Bootloader
+    bootloader = board["bootloader"]
+    for key in bootloader:
+        print(f"{id}.bootloader.{key}={bootloader[key]}")
 
 # Keyboard
-def keyboard_menu(id):
+def keyboard_menu(id, keyboard):
     print("# Keyboard ID #")
 
+    print(f"{id}.menu.keyboardid.default={keyboard['usb_manufacturer']} {keyboard['usb_product']}")
+    print(f"{id}.menu.keyboardid.default.build.vid={keyboard['vid']}")
+    print(f"{id}.menu.keyboardid.default.build.pid={keyboard['pid']}")
+    print(f"{id}.menu.keyboardid.default.build.usb_product=\"{keyboard['usb_product']}\"")
+    print(f"{id}.menu.keyboardid.default.build.usb_manufacturer=\"{keyboard['usb_manufacturer']}\"")
+    print()
+    
     for i in keyboards:
         keyboard = keyboards[i]
         print(f"{id}.menu.keyboardid.{i}={keyboard['usb_manufacturer']} {keyboard['usb_product']}")
@@ -340,7 +383,7 @@ def bridge_pin0_preset(id, value):
 menu_names()
 
 for board in boards:
-    board_flags(board['id'],board['name'])
+    board_flags(board)
 
     # Presets
     if "keyboard" in board["preset"]:
@@ -375,7 +418,7 @@ for board in boards:
 
     # Menus
     if "keyboard" in board["menu"]:
-        keyboard_menu(board['id'])
+        keyboard_menu(board['id'], board['keyboard'])
 
     if "protocol" in board["menu"]:
         protocol_menu(board['id'])
