@@ -176,13 +176,13 @@ protocols = {
 }
 
 debugs = {
-    "serial": {
-        "name": "Serial (115200b, newline)",
-        "flags": "-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200",
-    },
     "disabled": {
         "name": "Disabled",
         "flags": "",
+    },
+    "serial": {
+        "name": "Serial (115200b, newline)",
+        "flags": "-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200",
     },
 }
 

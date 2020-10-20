@@ -88,11 +88,11 @@ malduino_w.menu.keyboardid.ms.build.usb_product="USB Keyboard"
 malduino_w.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
 
 # Debug #
-malduino_w.menu.debug.serial=Serial (115200b, newline)
-malduino_w.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
-
 malduino_w.menu.debug.disabled=Disabled
 malduino_w.menu.debug.disabled.build.debug_flags=
+
+malduino_w.menu.debug.serial=Serial (115200b, newline)
+malduino_w.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
 
 ########## Adafruit Trinket M0 (SAMD21) ##########
 
@@ -169,11 +169,11 @@ trinket_m0.menu.protocol.serial=Serial
 trinket_m0.menu.protocol.serial.build.protocol_flags=-DENABLE_SERIAL
 
 # Debug #
-trinket_m0.menu.debug.serial=Serial (115200b, newline)
-trinket_m0.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
-
 trinket_m0.menu.debug.disabled=Disabled
 trinket_m0.menu.debug.disabled.build.debug_flags=
+
+trinket_m0.menu.debug.serial=Serial (115200b, newline)
+trinket_m0.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
 
 # Serial Bridge #
 trinket_m0.menu.bridge.disabled=Disabled
