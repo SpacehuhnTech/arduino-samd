@@ -15,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Read version
+        id: version
         run: |
-          echo ::set-env name=TAG::${GITHUB_REF/refs\/tags\//}
-          echo ::set-env name=VERSION::$(echo "${GITHUB_REF/refs\/tags\//}" | awk -F- -v OFS=- '{print $3}')
+          echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
+          echo ::set-output name=VERSION::$(echo "${GITHUB_REF/refs\/tags\//}" | awk -F- -v OFS=- '{print $3}')
 
       - name: Send message
         run: |
           curl -X POST https://api.github.com/repos/spacehuhntech/arduino/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "release ${{ env.TAG }}", "client_payload": { "version": "${{ env.VERSION }}", "project": "${{ env.PROJECT }}", "package": "${{ env.PACKAGE }}", "tag": "${{ env.TAG }}"}}'
+          --data '{"event_type": "release ${{ steps.version.outputs.TAG }}", "client_payload": { "version": "${{ steps.version.outputs.VERSION }}", "project": "${{ env.PROJECT }}", "package": "${{ env.PACKAGE }}", "tag": "${{ steps.version.outputs.TAG }}"}}'
