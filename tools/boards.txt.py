@@ -111,6 +111,63 @@ boards = [
             "bridge_reset": True,
             "bridge_pin0": True,
         },
+    },{
+        "id": "qtpy_m0",
+        "name": "Adafruit QT Py M0 (SAMD21)",
+        "upload": {
+            "tool": "bossac",
+            "protocol": "sam-ba",
+            "maximum_size": "262144",
+            "offset": "0x2000",
+            "use_1200bps_touch": "true",
+            "wait_for_upload_port": "true",
+            "native_usb": "true",
+        },
+        "build": {
+            "mcu": "cortex-m0plus",
+            "f_cpu": "48000000L",
+            "board": "QTPY_M0",
+            "core": "arduino",
+            "extra_flags": "-DCRYSTALLESS -DADAFRUIT_QTPY_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}",
+            "ldscript": "linker_scripts/gcc/flash_with_bootloader.ld",
+            "openocdscript": "openocd_scripts/trinket_m0.cfg",
+        },
+        "bootloader": {
+            "tool": "openocd",
+            "file": "qtpyM0/bootloader-qtpy_m0.bin",
+        },
+        "preset": {
+            "led": 12,
+        },
+        "pins": {
+            0:  "A0 (D0)",
+            1:  "A1 (D1)",
+            2:  "A2 (D2)",
+            3:  "A3 (D3)",
+            4:  "SDA (D4)",
+            5:  "SCL (D5)",
+            6:  "TX (A6,D6)",
+            7:  "RX (A7,D7)",
+            8:  "SCK (A8,D8)",
+            9:  "MI (A9,D9)",
+            10: "MO (A10,D10)",
+            12: "12 (Neopixel)",
+        },
+        "keyboard": {
+            "usb_manufacturer": "Adafruit",
+            "usb_product": "Trinket M0",
+            "vid": "0x239A",
+            "pid": "0x80CB",
+        },
+        "menu": {
+            "keyboard": True,
+            "protocol": True,
+            "debug": True,
+            "bridge": True,
+            "bridge_button": True,
+            "bridge_reset": True,
+            "bridge_pin0": True,
+        },
     }
 ]
 
@@ -236,6 +293,8 @@ def board_flags(board):
     bootloader = board["bootloader"]
     for key in bootloader:
         print(f"{id}.bootloader.{key}={bootloader[key]}")
+    
+    print()
 
 # Keyboard
 def keyboard_menu(id, keyboard):

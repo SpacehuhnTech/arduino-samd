@@ -32,6 +32,7 @@ malduino_w.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
 malduino_w.build.openocdscript=openocd_scripts/trinket_m0.cfg
 malduino_w.bootloader.tool=openocd
 malduino_w.bootloader.file=malduinoW/bootloader-malduino_w-v3.7.0
+
 # Protocol #
 malduino_w.build.protocol_flags=-DENABLE_SERIAL
 
@@ -115,6 +116,7 @@ trinket_m0.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
 trinket_m0.build.openocdscript=openocd_scripts/trinket_m0.cfg
 trinket_m0.bootloader.tool=openocd
 trinket_m0.bootloader.file=trinketm0/bootloader-trinket_m0-v2.0.0-adafruit.5.bin
+
 # Dotstar DI #
 trinket_m0.build.di_pin=-DDOTSTAR -DDOTSTAR_NUM=1 -DDOTSTAR_DI=7
 
@@ -244,4 +246,171 @@ trinket_m0.menu.bridge0.19=19 (SWCLK)
 trinket_m0.menu.bridge0.19.build.bridge_0=-DBRIDGE_0=19
 trinket_m0.menu.bridge0.20=20 (SWDIO)
 trinket_m0.menu.bridge0.20.build.bridge_0=-DBRIDGE_0=20
+
+########## Adafruit QT Py M0 (SAMD21) ##########
+
+qtpy_m0.name=Adafruit QT Py M0 (SAMD21)
+
+qtpy_m0.upload.tool=bossac
+qtpy_m0.upload.protocol=sam-ba
+qtpy_m0.upload.maximum_size=262144
+qtpy_m0.upload.offset=0x2000
+qtpy_m0.upload.use_1200bps_touch=true
+qtpy_m0.upload.wait_for_upload_port=true
+qtpy_m0.upload.native_usb=true
+qtpy_m0.build.variant=qtpy_m0
+qtpy_m0.build.mcu=cortex-m0plus
+qtpy_m0.build.f_cpu=48000000L
+qtpy_m0.build.board=QTPY_M0
+qtpy_m0.build.core=arduino
+qtpy_m0.build.extra_flags=-DCRYSTALLESS -DADAFRUIT_QTPY_M0 -D__SAMD21E18A__ -DARM_MATH_CM0PLUS {build.usb_flags}
+qtpy_m0.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+qtpy_m0.build.openocdscript=openocd_scripts/trinket_m0.cfg
+qtpy_m0.bootloader.tool=openocd
+qtpy_m0.bootloader.file=qtpyM0/bootloader-qtpy_m0.bin
+
+# LED #
+qtpy_m0.build.led_pin=-DNEOPIXEL -DNEOPIXEL_NUM=1 -DLED_PIN=12
+
+# Keyboard ID #
+qtpy_m0.menu.keyboardid.default=Adafruit Trinket M0
+qtpy_m0.menu.keyboardid.default.build.vid=0x239A
+qtpy_m0.menu.keyboardid.default.build.pid=0x80CB
+qtpy_m0.menu.keyboardid.default.build.usb_product="Trinket M0"
+qtpy_m0.menu.keyboardid.default.build.usb_manufacturer="Adafruit"
+
+qtpy_m0.menu.keyboardid.apple=Apple Aluminium Keyboard
+qtpy_m0.menu.keyboardid.apple.build.vid=0x05ac
+qtpy_m0.menu.keyboardid.apple.build.pid=0x0221
+qtpy_m0.menu.keyboardid.apple.build.usb_product="Aluminium Keyboard"
+qtpy_m0.menu.keyboardid.apple.build.usb_manufacturer="Apple"
+
+qtpy_m0.menu.keyboardid.appleint=Apple Internal Keyboard/Trackpad
+qtpy_m0.menu.keyboardid.appleint.build.vid=0x05ac
+qtpy_m0.menu.keyboardid.appleint.build.pid=0x0259
+qtpy_m0.menu.keyboardid.appleint.build.usb_product="Internal Keyboard/Trackpad"
+qtpy_m0.menu.keyboardid.appleint.build.usb_manufacturer="Apple"
+
+qtpy_m0.menu.keyboardid.logitechhid=Logitech USB Keyboard
+qtpy_m0.menu.keyboardid.logitechhid.build.vid=0x046d
+qtpy_m0.menu.keyboardid.logitechhid.build.pid=0xc316
+qtpy_m0.menu.keyboardid.logitechhid.build.usb_product="USB Keyboard"
+qtpy_m0.menu.keyboardid.logitechhid.build.usb_manufacturer="Logitech"
+
+qtpy_m0.menu.keyboardid.logitechgaming=Logitech G910 Keyboard
+qtpy_m0.menu.keyboardid.logitechgaming.build.vid=0x046d
+qtpy_m0.menu.keyboardid.logitechgaming.build.pid=0xc335
+qtpy_m0.menu.keyboardid.logitechgaming.build.usb_product="G910 Keyboard"
+qtpy_m0.menu.keyboardid.logitechgaming.build.usb_manufacturer="Logitech"
+
+qtpy_m0.menu.keyboardid.ms=Microsoft USB Keyboard
+qtpy_m0.menu.keyboardid.ms.build.vid=0x045e
+qtpy_m0.menu.keyboardid.ms.build.pid=0xfff8
+qtpy_m0.menu.keyboardid.ms.build.usb_product="USB Keyboard"
+qtpy_m0.menu.keyboardid.ms.build.usb_manufacturer="Microsoft"
+
+# Protocol #
+qtpy_m0.menu.protocol.auto=Auto (I2C & Serial)
+qtpy_m0.menu.protocol.auto.build.protocol_flags=-DENABLE_I2C -DENABLE_SERIAL
+
+qtpy_m0.menu.protocol.i2c=I2C
+qtpy_m0.menu.protocol.i2c.build.protocol_flags=-DENABLE_I2C
+
+qtpy_m0.menu.protocol.serial=Serial
+qtpy_m0.menu.protocol.serial.build.protocol_flags=-DENABLE_SERIAL
+
+# Debug #
+qtpy_m0.menu.debug.disabled=Disabled
+qtpy_m0.menu.debug.disabled.build.debug_flags=
+
+qtpy_m0.menu.debug.serial=Serial (115200b, newline)
+qtpy_m0.menu.debug.serial.build.debug_flags=-DENABLE_DEBUG -DDEBUG_PORT=Serial -DDEBUG_BAUD=115200
+
+# Serial Bridge #
+qtpy_m0.menu.bridge.disabled=Disabled
+qtpy_m0.menu.bridge.disabled.build.bridge_flags=
+
+qtpy_m0.menu.bridge.serial1=Serial1
+qtpy_m0.menu.bridge.serial1.build.bridge_flags=-DBRIDGE_ENABLE -DBRIDGE_PORT=Serial1
+
+qtpy_m0.menu.bridge.serial1_inverted=Serial1 (inverted logic)
+qtpy_m0.menu.bridge.serial1_inverted.build.bridge_flags=-DBRIDGE_ENABLE -DBRIDGE_PORT=Serial1 -DBRIDGE_0_INVERTED
+
+qtpy_m0.menu.bridgebutton.disabled=Disabled
+qtpy_m0.menu.bridgebutton.0=A0 (D0)
+qtpy_m0.menu.bridgebutton.0.build.bridge_button=-DBRIDGE_SWITCH=0
+qtpy_m0.menu.bridgebutton.1=A1 (D1)
+qtpy_m0.menu.bridgebutton.1.build.bridge_button=-DBRIDGE_SWITCH=1
+qtpy_m0.menu.bridgebutton.2=A2 (D2)
+qtpy_m0.menu.bridgebutton.2.build.bridge_button=-DBRIDGE_SWITCH=2
+qtpy_m0.menu.bridgebutton.3=A3 (D3)
+qtpy_m0.menu.bridgebutton.3.build.bridge_button=-DBRIDGE_SWITCH=3
+qtpy_m0.menu.bridgebutton.4=SDA (D4)
+qtpy_m0.menu.bridgebutton.4.build.bridge_button=-DBRIDGE_SWITCH=4
+qtpy_m0.menu.bridgebutton.5=SCL (D5)
+qtpy_m0.menu.bridgebutton.5.build.bridge_button=-DBRIDGE_SWITCH=5
+qtpy_m0.menu.bridgebutton.6=TX (A6,D6)
+qtpy_m0.menu.bridgebutton.6.build.bridge_button=-DBRIDGE_SWITCH=6
+qtpy_m0.menu.bridgebutton.7=RX (A7,D7)
+qtpy_m0.menu.bridgebutton.7.build.bridge_button=-DBRIDGE_SWITCH=7
+qtpy_m0.menu.bridgebutton.8=SCK (A8,D8)
+qtpy_m0.menu.bridgebutton.8.build.bridge_button=-DBRIDGE_SWITCH=8
+qtpy_m0.menu.bridgebutton.9=MI (A9,D9)
+qtpy_m0.menu.bridgebutton.9.build.bridge_button=-DBRIDGE_SWITCH=9
+qtpy_m0.menu.bridgebutton.10=MO (A10,D10)
+qtpy_m0.menu.bridgebutton.10.build.bridge_button=-DBRIDGE_SWITCH=10
+qtpy_m0.menu.bridgebutton.12=12 (Neopixel)
+qtpy_m0.menu.bridgebutton.12.build.bridge_button=-DBRIDGE_SWITCH=12
+
+qtpy_m0.menu.bridgerst.disabled=Disabled
+qtpy_m0.menu.bridgerst.0=A0 (D0)
+qtpy_m0.menu.bridgerst.0.build.bridge_rst=-DBRIDGE_RST=0
+qtpy_m0.menu.bridgerst.1=A1 (D1)
+qtpy_m0.menu.bridgerst.1.build.bridge_rst=-DBRIDGE_RST=1
+qtpy_m0.menu.bridgerst.2=A2 (D2)
+qtpy_m0.menu.bridgerst.2.build.bridge_rst=-DBRIDGE_RST=2
+qtpy_m0.menu.bridgerst.3=A3 (D3)
+qtpy_m0.menu.bridgerst.3.build.bridge_rst=-DBRIDGE_RST=3
+qtpy_m0.menu.bridgerst.4=SDA (D4)
+qtpy_m0.menu.bridgerst.4.build.bridge_rst=-DBRIDGE_RST=4
+qtpy_m0.menu.bridgerst.5=SCL (D5)
+qtpy_m0.menu.bridgerst.5.build.bridge_rst=-DBRIDGE_RST=5
+qtpy_m0.menu.bridgerst.6=TX (A6,D6)
+qtpy_m0.menu.bridgerst.6.build.bridge_rst=-DBRIDGE_RST=6
+qtpy_m0.menu.bridgerst.7=RX (A7,D7)
+qtpy_m0.menu.bridgerst.7.build.bridge_rst=-DBRIDGE_RST=7
+qtpy_m0.menu.bridgerst.8=SCK (A8,D8)
+qtpy_m0.menu.bridgerst.8.build.bridge_rst=-DBRIDGE_RST=8
+qtpy_m0.menu.bridgerst.9=MI (A9,D9)
+qtpy_m0.menu.bridgerst.9.build.bridge_rst=-DBRIDGE_RST=9
+qtpy_m0.menu.bridgerst.10=MO (A10,D10)
+qtpy_m0.menu.bridgerst.10.build.bridge_rst=-DBRIDGE_RST=10
+qtpy_m0.menu.bridgerst.12=12 (Neopixel)
+qtpy_m0.menu.bridgerst.12.build.bridge_rst=-DBRIDGE_RST=12
+
+qtpy_m0.menu.bridge0.disabled=Disabled
+qtpy_m0.menu.bridge0.0=A0 (D0)
+qtpy_m0.menu.bridge0.0.build.bridge_0=-DBRIDGE_0=0
+qtpy_m0.menu.bridge0.1=A1 (D1)
+qtpy_m0.menu.bridge0.1.build.bridge_0=-DBRIDGE_0=1
+qtpy_m0.menu.bridge0.2=A2 (D2)
+qtpy_m0.menu.bridge0.2.build.bridge_0=-DBRIDGE_0=2
+qtpy_m0.menu.bridge0.3=A3 (D3)
+qtpy_m0.menu.bridge0.3.build.bridge_0=-DBRIDGE_0=3
+qtpy_m0.menu.bridge0.4=SDA (D4)
+qtpy_m0.menu.bridge0.4.build.bridge_0=-DBRIDGE_0=4
+qtpy_m0.menu.bridge0.5=SCL (D5)
+qtpy_m0.menu.bridge0.5.build.bridge_0=-DBRIDGE_0=5
+qtpy_m0.menu.bridge0.6=TX (A6,D6)
+qtpy_m0.menu.bridge0.6.build.bridge_0=-DBRIDGE_0=6
+qtpy_m0.menu.bridge0.7=RX (A7,D7)
+qtpy_m0.menu.bridge0.7.build.bridge_0=-DBRIDGE_0=7
+qtpy_m0.menu.bridge0.8=SCK (A8,D8)
+qtpy_m0.menu.bridge0.8.build.bridge_0=-DBRIDGE_0=8
+qtpy_m0.menu.bridge0.9=MI (A9,D9)
+qtpy_m0.menu.bridge0.9.build.bridge_0=-DBRIDGE_0=9
+qtpy_m0.menu.bridge0.10=MO (A10,D10)
+qtpy_m0.menu.bridge0.10.build.bridge_0=-DBRIDGE_0=10
+qtpy_m0.menu.bridge0.12=12 (Neopixel)
+qtpy_m0.menu.bridge0.12.build.bridge_0=-DBRIDGE_0=12
 
